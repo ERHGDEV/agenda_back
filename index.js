@@ -4,9 +4,10 @@ const PORT = process.env.PORT || 3001
 const morgan = require( 'morgan' )
 const cors = require( 'cors' )
 const mongoose = require( 'mongoose' )
-const config = require( './config' )
 
-const url = `mongodb+srv://adminagenda:${config.PASSWORD}@cluster0.vcjrqqa.mongodb.net/agendadb?retryWrites=true&w=majority&appName=Cluster0`
+require('dotenv').config()
+
+const url = `mongodb+srv://adminagenda:${process.env.PASSWORD}@cluster0.vcjrqqa.mongodb.net/agendadb?retryWrites=true&w=majority&appName=Cluster0`
 mongoose.set( 'strictQuery', false )
 
 app.use( express.json() )
@@ -36,8 +37,8 @@ const personSchema = new mongoose.Schema({
 const Person = mongoose.model( 'Person', personSchema )
 
 const person = new Person({
-    name: 'Juan Diaz',
-    number: 6141111111
+    name: 'Pancho Cachondo',
+    number: 6145463982
 })
 
 person.save().then( result => {
