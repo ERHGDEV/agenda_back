@@ -4,9 +4,9 @@ const PORT = process.env.PORT || 3001
 const morgan = require( 'morgan' )
 const cors = require( 'cors' )
 const mongoose = require( 'mongoose' )
+const config = require( './config' )
 
-const url = `mongodb+srv://adminagenda:${process.env.PASSWORD}@cluster0.vcjrqqa.mongodb.net/agendadb?retryWrites=true&w=majority&appName=Cluster0`
-
+const url = `mongodb+srv://adminagenda:${config.PASSWORD}@cluster0.vcjrqqa.mongodb.net/agendadb?retryWrites=true&w=majority&appName=Cluster0`
 mongoose.set( 'strictQuery', false )
 
 app.use( express.json() )
