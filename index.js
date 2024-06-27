@@ -3,6 +3,11 @@ const app = express()
 const PORT = process.env.PORT || 3001
 const morgan = require( 'morgan' )
 const cors = require( 'cors' )
+const mongoose = require( 'mongoose' )
+
+const url = `mongodb+srv://adminagenda:${process.env.PASSWORD}@cluster0.vcjrqqa.mongodb.net/agendadb?retryWrites=true&w=majority&appName=Cluster0`
+
+mongoose.set( 'strictQuery', false )
 
 app.use( express.json() )
 app.use( morgan( ':method :url :status :res[content-length] - :response-time ms' ) )
@@ -20,6 +25,25 @@ const requestLogger = ( request, response, next ) => {
 }
 
 app.use( requestLogger )
+
+mongoose.connect( url )
+
+const personSchema = new mongoose.Schema({
+    name: String,
+    number: Number
+})
+
+const Person = mongoose.model( 'Person', personSchema )
+
+const person = new Person({
+    name: 'Juan Diaz',
+    number: 6141111111
+})
+
+person.save().then( result => {
+    console.log( 'person saved!' )
+    mongoose.connection.close()
+})
 
 let persons = [
     { 
