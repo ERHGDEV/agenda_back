@@ -5,9 +5,8 @@ const morgan = require( 'morgan' )
 const cors = require( 'cors' )
 
 app.use( express.json() )
-
 app.use( morgan( ':method :url :status :res[content-length] - :response-time ms' ) )
-
+app.use( express.static( 'dist' ) )
 app.use( cors() )
 
 const date = new Date();
