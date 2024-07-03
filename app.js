@@ -19,6 +19,11 @@ mongoose.connect( config.MONGODBURL )
         logger.error( 'error connecting to MongoDB', error.message )
     }) 
 
+app.use( req, res, next ) => {
+    console.log(`request url: ${req.url}`)
+    next()
+}
+
 app.use( cors() )
 app.use( express.static( 'dist' ) )
 app.use( express.json() )
